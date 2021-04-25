@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Style.css">
+    <title>Title</title>
+</head>
+
+<style>
+    .ArithmaSlide{
+        width: 100vw;
+        height: 100vh;
+        background-size: 100% 100%;
+        position: absolute;
+    }
+
+    .ArithmaCustomOutAnim{
+        animation: ScaleFlyOut 0.8s forwards;
+    }
+
+    .ArithmaCustomInAnim{
+        animation: AlphaFlyIn 0.8s forwards;
+    }
+
+
+    @keyframes ScaleFlyOut {
+        0%{
+            transform: scale(1);
+            margin-top: 0;
+        }
+        50%{
+            transform: scale(0.8);
+            margin-top: 0;
+        }
+        100%{
+            transform: scale(0.8);
+            margin-top: -100vh;
+        }
+    }
+
+    @keyframes AlphaFlyIn {
+        0%{
+            opacity: 0.5;
+            margin-top: -100vh;
+        }
+        50%{
+            opacity: 0.5;
+            margin-top: 0;
+        }
+        100%{
+            opacity: 1;
+            margin-top: 0;
+        }
+    }
+</style>
+
+<body>
+<div class="ArithmaSlide" style="background-image: url('images/1.jpg'); z-index: 3">
+    slide 1
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/2.jpg'); z-index: 2">
+    slide 2
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/3.jpg'); z-index: 1">
+    slide 3
+</div>
+
+<script src="ArithmaSlide.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        ArithmaSlideWidget.config.cssAnimationIn = 'ArithmaCustomInAnim';
+        ArithmaSlideWidget.config.cssAnimationOut = 'ArithmaCustomOutAnim';
+
+        ArithmaSlideWidget.init();
+    });
+</script>
+</body>
+</html>

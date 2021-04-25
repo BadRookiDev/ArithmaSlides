@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Style.css">
+    <title>Title</title>
+</head>
+
+<style>
+    .ArithmaSlide{
+        width: 100vw;
+        height: 100vh;
+        background-size: 100% 100%;
+    }
+</style>
+
+<body>
+<div class="ArithmaSlide" style="background-image: url('images/1.jpg')">
+    slide 1
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/2.jpg')">
+    slide 2
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/3.jpg')">
+    slide 3
+</div>
+
+<script src="ArithmaSlide.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        ArithmaSlideWidget.config.noSlideDown = function (){
+            alert("No Slide Down!");
+        }
+        ArithmaSlideWidget.config.noSlideUp = function (){
+            alert("No Slide Up!");
+        }
+        ArithmaSlideWidget.init();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Style.css">
+    <title>Title</title>
+</head>
+
+<style>
+    .ArithmaSlide{
+        width: 100vw;
+        height: 100vh;
+        background-size: 100% 100%;
+    }
+
+    #ArithmaPagination{
+        padding: 10px;
+        position: fixed;
+        width: 80px;
+        background: whitesmoke;
+        border-radius: 0.25rem;
+        z-index: 999;
+        right: 20px;
+        top: calc(50vh - 90px);
+    }
+
+    .hollow{
+        display:inline-block;
+        width: 76px;
+        height: 20px;
+        margin-bottom: 20px;
+        border: 2px solid silver;
+        border-radius: 0.25rem;
+        color: black;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        padding-top: 4px;
+    }
+
+    .filled{
+
+    }
+</style>
+
+<body>
+
+<div class="ArithmaSlide" style="background-image: url('images/1.jpg')">
+    slide 1
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/2.jpg')">
+    slide 2
+</div>
+<div class="ArithmaSlide" style="background-image: url('images/3.jpg')">
+    slide 3
+</div>
+
+<div id="ArithmaPagination">
+    <span class="hollow">Home</span>
+    <span class="hollow"></span>
+    <span class="hollow"></span>
+</div>
+
+<script src="ArithmaSlide.js"></script>
+<script>
+    let arr = ['Home', 'About', 'Contact']
+
+    document.addEventListener("DOMContentLoaded", function() {
+        ArithmaSlideWidget.config.pageIndexCallback = function (pageIndex){
+            let locations = document.getElementById('ArithmaPagination').querySelectorAll('.hollow');
+            for (let i = 0; i < locations.length; i++){
+                locations[i].innerHTML = '';
+            }
+            locations[pageIndex].innerHTML = arr[pageIndex];
+        }
+
+        ArithmaSlideWidget.init();
+    });
+
+</script>
+</body>
+</html>
