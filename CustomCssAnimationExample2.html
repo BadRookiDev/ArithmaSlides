@@ -19,7 +19,7 @@
     }
 
     .ArithmaCustomInAnim{
-        animation: CustomIn 1s forwards ease-in-out;
+        animation: CustomIn 0.5s forwards ease-in-out;
     }
 
 
@@ -47,10 +47,14 @@
 
     @keyframes CustomIn {
         0%{
-            transform: rotateX(-90deg);
+            transform: scale(0.1) rotateZ(-90deg);
+            margin-left: -100vh;
+            margin-top: -100vh;
         }
         100%{
-            transform: rotateX(0deg);
+            transform: scale(1) rotateZ(0deg);
+            margin-left: 0;
+            margin-top: 0;
         }
     }
 </style>
