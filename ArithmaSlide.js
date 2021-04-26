@@ -34,14 +34,6 @@ const ArithmaSlideWidget = (function() {
         return allPages;
     }
 
-    return {
-        init: _init,
-        getAllPages:  _getAllPages,
-        config: ConfigMap
-    }
-}());
-
-
     const ScrollHandler = (function () {
         let isMoving = false;
         let isActive = true;
