@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Style.css">
+    <title>Title</title>
+</head>
+
+<style>
+    .ArithmaSlide{
+        width: 100vw;
+        height: 100vh;
+        background-size: 100% 100%;
+        position: absolute;
+    }
+
+    #ArithmaPagination{
+        padding: 10px;
+        position: fixed;
+        width: 80px;
+        background: whitesmoke;
+        border-radius: 0.25rem;
+        z-index: 999;
+        right: 20px;
+        top: calc(50vh - 90px);
+    }
+
+    .hollow{
+        display:inline-block;
+        width: 76px;
+        height: 20px;
+        margin-bottom: 20px;
+        border: 2px solid silver;
+        border-radius: 0.25rem;
+        color: black;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        padding-top: 4px;
+    }
+
+    .ArithmaCustomOutAnim{
+        animation: CustomOut 1s forwards ease-in-out;
+    }
+
+    .ArithmaCustomInAnim{
+        animation: CustomIn 0.5s forwards ease-in-out;
+    }
+
+
+    @keyframes CustomOut {
+        0%{
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
+            transform: rotate3d(0, 0, 0, 0);
+            opacity: 1
+        }
+        45%{
+            box-shadow: 100px 100px 50px 50px rgba(0,0,0,0.3);
+            transform: rotate3d(2, -1, -1, -0.2turn);
+            opacity: 1
+        }
+        55%{
+            box-shadow: 100px 100px 50px 50px rgba(0,0,0,0.3);
+            transform: rotate3d(2, -1, -1, -0.2turn);
+            opacity: 1
+        }
+        100%{
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+
+    @keyframes CustomIn {
+        0%{
+            transform: scale(0.1) rotateZ(-90deg);
+            margin-left: -100vh;
+            margin-top: -100vh;
+            opacity: 0;
+        }
+        100%{
+            transform: scale(1) rotateZ(0deg);
+            margin-left: 0;
+            margin-top: 0;
+            opacity: 1;
+        }
+    }
+</style>
+
+<body>
+
+<div class="ArithmaSlide" style="background-image: url('images/1.jpg'); z-index: 3">
+    <h1 class="title" style="margin-top: 30vh">ARITHMA SLIDES</h1>
+    <hr>
+    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+</div>
+
+<div class="ArithmaSlide" style="background-image: url('images/2.jpg'); z-index: 2">
+    <h1 class="title" style="margin-top: 30vh">OPEN SOURCE</h1>
+    <hr>
+    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+</div>
+
+<div class="ArithmaSlide" style="background-image: url('images/3.jpg'); z-index: 1">
+    <h1 class="title" style="margin-top: 30vh">NO MORE JQUERY</h1>
+    <hr>
+    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+</div>
+
+<div id="ArithmaPagination">
+    <span class="hollow">Home</span>
+    <span class="hollow"></span>
+    <span class="hollow"></span>
+</div>
+
+<script src="ArithmaSlide.js"></script>
+<script>
+    let arr = ['Home', 'About', 'Contact']
+    document.addEventListener("DOMContentLoaded", function() {
+        ArithmaSlideWidget.config.cssAnimationIn = 'ArithmaCustomInAnim';
+        ArithmaSlideWidget.config.cssAnimationOut = 'ArithmaCustomOutAnim';
+        ArithmaSlideWidget.config.pageIndexCallback = function (pageIndex){
+            let locations = document.getElementById('ArithmaPagination').querySelectorAll('.hollow');
+            for (let i = 0; i < locations.length; i++){
+                locations[i].innerHTML = '';
+            }
+            locations[pageIndex].innerHTML = arr[pageIndex];
+
+
+        }
+
+        ArithmaSlideWidget.init();
+    });
+</script>
+</body>
+</html>

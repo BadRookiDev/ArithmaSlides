@@ -1,4 +1,4 @@
-const ArithmaSlideWidget = (function () {
+const ArithmaSlideWidget = (function() {
     let allPages;
     const ConfigMap = {}
 
@@ -30,9 +30,16 @@ const ArithmaSlideWidget = (function () {
         document.getElementsByTagName('head')[0].appendChild(style);
     }
 
-    const _getAllPages = function () {
+    const _getAllPages = function (){
         return allPages;
     }
+
+    return {
+        init: _init,
+        getAllPages:  _getAllPages,
+        config: ConfigMap
+    }
+}());
 
 
     const ScrollHandler = (function () {
@@ -61,6 +68,9 @@ const ArithmaSlideWidget = (function () {
             if (isMoving || !isActive) return;
             event.preventDefault();
             isMoving = true;
+            setTimeout(function() {
+                isMoving=false;
+            },2000);
 
             window.setTimeout(() => isMoving = false, 500);
 
@@ -79,28 +89,44 @@ const ArithmaSlideWidget = (function () {
                 let previousPage = ArithmaSlideWidget.getAllPages()[pageIndex];
                 pageIndex++;
 
-                if (previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationOut)
-                    && previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationIn)) {
-                    previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
-                    previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
-                }
-
-                previousPage.classList.add(ArithmaSlideWidget.config.cssAnimationOut);
-            } else if (ArithmaSlideWidget.config.hasOwnProperty('noSlideDown')) {
-                ArithmaSlideWidget.config.noSlideDown();
+            if (previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationOut)
+                &&previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationIn)){
+                previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
+                previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
             }
-        }
-        //TODO: hoeveelheid wat gescrolled wordt aanpassen naarmate de grootte van de div
-        const slidePageUp = function () {
-            if (pageIndex !== 0) {
-                pageIndex--;
+
+            previousPage.classList.add(ArithmaSlideWidget.config.cssAnimationOut);
+
+            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextIn')){
                 let nextPage = ArithmaSlideWidget.getAllPages()[pageIndex];
 
-                nextPage.classList.add(ArithmaSlideWidget.config.cssAnimationIn);
-            } else if (ArithmaSlideWidget.config.hasOwnProperty('noSlideUp')) {
-                ArithmaSlideWidget.config.noSlideUp();
+                if (nextPage.classList.contains(ArithmaSlideWidget.config.cssAnimationNextOut)
+                    &&nextPage.classList.contains(ArithmaSlideWidget.config.cssAnimationNextIn)){
+                    nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextIn);
+                    nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextOut);
+                }
+
+                nextPage.classList.add(ArithmaSlideWidget.config.cssAnimationNextIn);
             }
+        } else if (ArithmaSlideWidget.config.hasOwnProperty('noSlideDown')) {
+            ArithmaSlideWidget.config.noSlideDown();
         }
+    }
+
+    const slidePageUp = function (){
+        if (pageIndex!==0) {
+            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextOut')){
+
+            }
+
+            pageIndex--;
+            let nextPage = ArithmaSlideWidget.getAllPages()[pageIndex];
+
+            nextPage.classList.add(ArithmaSlideWidget.config.cssAnimationIn);
+        } else if (ArithmaSlideWidget.config.hasOwnProperty('noSlideUp')) {
+            ArithmaSlideWidget.config.noSlideUp();
+        }
+    }
 
         return {
             init: _init,
