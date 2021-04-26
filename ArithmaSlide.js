@@ -1,12 +1,14 @@
 const ArithmaSlideWidget = (function () {
     let allPages;
+    let slideElement;
     const ConfigMap = {}
 
     const _init = function (element) {
         if (!ConfigMap.hasOwnProperty('cssAnimationOut') ||
             !ConfigMap.hasOwnProperty('cssAnimationIn')) {
-            generateStandardCssAnimation();
+            generateStandardCssAnimation(element);
         }
+        slideElement = element;
         if (element === null || element === undefined) {
             document.body.style.overflow = 'hidden';
             allPages = document.querySelectorAll('.ArithmaSlide');
@@ -19,15 +21,26 @@ const ArithmaSlideWidget = (function () {
         }
     }
 
-    const generateStandardCssAnimation = () => {
-        let style = document.createElement('style');
-        style.innerHTML = '.fullSlideOut{animation: fadeOut 0.8s forwards}.fullSlideIn{animation: fadeIn 0.8s forwards}' +
-            '@keyframes fadeOut {0%{margin-top: 0;}100%{margin-top: -100vh;}}@keyframes fadeIn {0%{margin-top: -100vh;}100%{margin-top: 0;}}';
+    const refreshStyle = () => generateStandardCssAnimation(slideElement);
+
+    const generateStandardCssAnimation = (element) => {
+        let id = 'ArithmaSlideStyle';
+        let height = "100vh";
+        if(element !== null && element !== undefined) {
+            height = document.getElementById(element). offsetHeight + "px";
+        }
+        let oldStyle = document.getElementById(id);
+        if(oldStyle !== undefined && oldStyle !== null) oldStyle.parentNode.removeChild(element);
+
+        let newStyle = document.createElement('style');
+        newStyle.id = id;
+        newStyle.innerHTML = `.fullSlideOut{animation: fadeOut 0.8s forwards}.fullSlideIn{animation: fadeIn 0.8s forwards}` +
+            `@keyframes fadeOut {0%{margin-top: 0;}100%{margin-top: -${height};}}@keyframes fadeIn {0%{margin-top: -${height};}100%{margin-top: 0;}}`;
 
         ConfigMap.cssAnimationOut = 'fullSlideOut';
         ConfigMap.cssAnimationIn = 'fullSlideIn';
 
-        document.getElementsByTagName('head')[0].appendChild(style);
+        document.getElementsByTagName('head')[0].appendChild(newStyle);
     }
 
     const _getAllPages = function () {
@@ -123,7 +136,8 @@ const ArithmaSlideWidget = (function () {
         return {
             init: _init,
             triggerUp: slidePageUp,
-            triggerDown: slidePageDown
+            triggerDown: slidePageDown,
+            refreshStyle: refreshStyle
         }
     }());
 
