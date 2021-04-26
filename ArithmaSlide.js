@@ -73,9 +73,6 @@ const ArithmaSlideWidget = (function () {
             if (isMoving || !isActive) return;
             event.preventDefault();
             isMoving = true;
-            setTimeout(function () {
-                isMoving = false;
-            }, 2000);
 
             window.setTimeout(() => isMoving = false, 500);
 
