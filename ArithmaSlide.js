@@ -1,7 +1,9 @@
 const ArithmaSlideWidget = (function () {
     let allPages;
 
-    const ConfigMap = {}
+    const ConfigMap = {
+        scrollStopCheckTimeOut: 44
+    }
 
     const _init = function (element) {
 
@@ -60,15 +62,15 @@ ArithmaSlideWidget.ScrollHandler = (function () {
     }
 
     const MouseWheelHandler = function (event) {
-        console.log('isScrolling:' ,isScrolling);
         if (!isScrolling){
+            let previousPageIndex = pageIndex
             if (event.deltaY < 0) {
                 slidePageUp();
             } else if (event.deltaY > 0) {
                 slidePageDown();
             }
             if (ArithmaSlideWidget.config.hasOwnProperty('pageIndexCallback')) {
-                ArithmaSlideWidget.config.pageIndexCallback(pageIndex);
+                ArithmaSlideWidget.config.pageIndexCallback(previousPageIndex, pageIndex);
             }
         }
 
@@ -76,7 +78,7 @@ ArithmaSlideWidget.ScrollHandler = (function () {
         clearTimeout( scrollTimer );
         scrollTimer = setTimeout(function() {
             isScrolling=false;
-        }, 44);
+        }, ArithmaSlideWidget.config.scrollStopCheckTimeOut);
     }
 
     //TODO: hoeveelheid wat gescrolled wordt aanpassen naarmate de grootte van de div

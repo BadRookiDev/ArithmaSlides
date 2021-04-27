@@ -2,9 +2,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="Style.css">
     <title>Title</title>
 </head>
+
+<style>
+    .ArithmaSlide{
+        width: 100vw;
+        height: 100vh;
+        background-size: 100% 100%;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    .slideAboveOutWhole{
+        animation: saow 0.8s forwards ease-in-out;
+    }
+
+    .slideBelowInHalf{
+        animation: sbih 0.8s forwards ease-in-out;
+    }
+
+    .slideBelowOutHalf{
+        animation: sboh 0.8s forwards ease-in-out;
+    }
+
+    .slideAboveInWhole{
+        animation: saiw 0.8s forwards ease-in-out;
+    }
+
+    @keyframes saow {
+        0%{
+            margin-top: 0;
+            filter: brightness(100%);
+        }
+        100%{
+            margin-top: -100vh;
+            filter: brightness(80%);
+        }
+    }
+
+    @keyframes sbih {
+        0%{
+            margin-top: 50vh;
+            filter: brightness(50%);
+        }
+        100%{
+            margin-top: 0;
+            filter: brightness(100%);
+        }
+    }
+
+    @keyframes sboh {
+        0%{
+            margin-top: 0;
+            filter: brightness(100%);
+        }
+        100%{
+            margin-top: 50vh;
+            filter: brightness(50%);
+        }
+    }
+
+    @keyframes saiw {
+        0%{
+            margin-top: -100vh;
+            filter: brightness(80%);
+        }
+        100%{
+            margin-top: 0;
+            filter: brightness(100%);
+        }
+    }
+
+</style>
+
 <body>
 
+<div class="ArithmaSlide" style="background-image: url('images/1.jpg'); z-index: 3">
+    <h1 class="title" style="margin-top: 20vh">ARITHMA <br><span>SLIDES</span></h1>
+    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+</div>
+
+<div class="ArithmaSlide" style="background-image: url('images/2.jpg'); z-index: 2">
+    <h1 class="title" style="margin-top: 20vh">OPEN <br><span>SOURCE</span></h1>
+    <a class="btn btn-primary" style="display: block; margin: 0 auto !important;"
+       href="https://github.com/BadRookiDev/ArithmaSlides"><i class="bi bi-github"></i> Github Repository</a>
+</div>
+
+<div class="ArithmaSlide" style="background-image: url('images/3.jpg'); z-index: 1">
+    <h1 class="title" style="margin-top: 20vh">JAVASCRIPT <br><span>ONLY</span></h1>
+    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+</div>
+
+<script src="ArithmaSlide.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        ArithmaSlideWidget.config.scrollStopCheckTimeOut = 150;
+
+        ArithmaSlideWidget.config.cssAnimationIn = 'slideAboveInWhole';
+        ArithmaSlideWidget.config.cssAnimationOut = 'slideAboveOutWhole';
+
+        ArithmaSlideWidget.config.cssAnimationNextIn = 'slideBelowInHalf'
+        ArithmaSlideWidget.config.cssAnimationNextOut = 'slideBelowOutHalf'
+
+        ArithmaSlideWidget.config.pageIndexCallback = function (previousPageIndex, newPageIndex){
+            let pages = ArithmaSlideWidget.getAllPages();
+
+        }
+
+        ArithmaSlideWidget.init();
+    });
+</script>
 </body>
 </html>

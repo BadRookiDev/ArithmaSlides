@@ -1,29 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Poppins&family=Oxanium:wght@700&display=swap');
+
 body{
     margin: 0;
 }
 
 h1.title{
-    font-size: 8vw;
-    font-family: "Arial";
+    font-size: 11vw;
+    font-family: "Poppins", sans-serif;
     text-align: center;
     width: 100%;
     color: whitesmoke;
-    text-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+    text-shadow: 0px 0px 20px rgba(0,0,0,0.5);
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    line-height: 1;
+}
+
+h1.title span{
+    font-family: "Oxanium", sans-serif;
+    color: #ff8080;
+    -webkit-text-stroke: 10px #fff;
 }
 
 hr{
-    width: 70%;
-    margin-left: 15%;
-    border-bottom: transparent;
-    border-top: 1px solid rgba(0,0,0,0.4);
+    width: 60%;
+    margin-left: 20%;
+    border: 1px solid rgba(36, 36, 36, 0.5);
+    border-radius: 10px;
 }
 
 p.subtitle{
     font-size: 2vw;
-    font-family: "Arial";
+    font-family: 'Raleway',sans-serif;
     text-align: center;
     width: 100%;
-    color: #3b3b3b;
+    color: whitesmoke;
+}
+
+a.btn.btn-primary{
+    width: 30vw;
+    margin-left: 40vw;
+    background: #ff8080;
+    border: 2px solid whitesmoke;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-size: 22px;
+    transition: all 0.5s;
+}
+
+a.btn.btn-primary:hover{
+    box-shadow: 0px 0px 50px 10px #ff8080;
+    background: whitesmoke;
+    color: #ff8080;
+    transition: all 0.5s;
+}
+
+i{
+    margin-right: 10px;
+}
+
+@keyframes TitleIn {
+    0%{
+        height: 0;
+    }
+    100%{
+        height: 100%;
+    }
+}
+
+@keyframes TitleOut {
+    0%{
+        height: 100%;
+    }
+    100%{
+        height: 0;
+    }
 }

@@ -118,12 +118,12 @@
     document.addEventListener("DOMContentLoaded", function() {
         ArithmaSlideWidget.config.cssAnimationIn = 'ArithmaCustomInAnim';
         ArithmaSlideWidget.config.cssAnimationOut = 'ArithmaCustomOutAnim';
-        ArithmaSlideWidget.config.pageIndexCallback = function (pageIndex){
+        ArithmaSlideWidget.config.pageIndexCallback = function (previousPageIndex, newPageIndex){
             let locations = document.getElementById('ArithmaPagination').querySelectorAll('.hollow');
             for (let i = 0; i < locations.length; i++){
                 locations[i].innerHTML = '';
             }
-            locations[pageIndex].innerHTML = arr[pageIndex];
+            locations[newPageIndex].innerHTML = arr[newPageIndex];
 
 
         }
