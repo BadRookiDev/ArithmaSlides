@@ -19,10 +19,12 @@
 
     .slideAboveOutWhole{
         animation: saow 0.8s forwards ease-in-out;
+        animation-delay: 0.15s;
     }
 
     .slideBelowInHalf{
         animation: sbih 0.8s forwards ease-in-out;
+        animation-delay: 0.15s;
     }
 
     .slideBelowOutHalf{
@@ -36,18 +38,16 @@
     @keyframes saow {
         0%{
             margin-top: 0;
-            filter: brightness(100%);
         }
         100%{
             margin-top: -100vh;
-            filter: brightness(80%);
         }
     }
 
     @keyframes sbih {
         0%{
             margin-top: 50vh;
-            filter: brightness(50%);
+            filter: brightness(0%);
         }
         100%{
             margin-top: 0;
@@ -62,18 +62,16 @@
         }
         100%{
             margin-top: 50vh;
-            filter: brightness(50%);
+            filter: brightness(0%);
         }
     }
 
     @keyframes saiw {
         0%{
             margin-top: -100vh;
-            filter: brightness(80%);
         }
         100%{
             margin-top: 0;
-            filter: brightness(100%);
         }
     }
 
@@ -82,8 +80,8 @@
 <body>
 
 <div class="ArithmaSlide" style="background-image: url('images/1.jpg'); z-index: 3">
-    <h1 class="title" style="margin-top: 20vh">ARITHMA <br><span>SLIDES</span></h1>
-    <p class="subtitle">A free javascript only library to make all kinds of slideshows!</p>
+    <h1 class="title titleIn" style="margin-top: 20vh">ARITHMA <br><span>SLIDES</span></h1>
+    <p class="subtitle restIn">A free javascript only library to make all kinds of slideshows!</p>
 </div>
 
 <div class="ArithmaSlide" style="background-image: url('images/2.jpg'); z-index: 2">
@@ -99,6 +97,10 @@
 
 <script src="ArithmaSlide.js"></script>
 <script>
+    //this logic is not required and not part of the library, in this case it works.
+    //it might not suit your situation, you might need to find your own way
+    let titles = document.querySelectorAll('.title');
+
     document.addEventListener("DOMContentLoaded", function() {
         ArithmaSlideWidget.config.scrollStopCheckTimeOut = 150;
 
@@ -109,8 +111,36 @@
         ArithmaSlideWidget.config.cssAnimationNextOut = 'slideBelowOutHalf'
 
         ArithmaSlideWidget.config.pageIndexCallback = function (previousPageIndex, newPageIndex){
-            let pages = ArithmaSlideWidget.getAllPages();
+            if (previousPageIndex!==newPageIndex){
+                titles[previousPageIndex].classList.remove('titleOut');
+                titles[previousPageIndex].classList.remove('titleIn');
 
+                titles[newPageIndex].classList.remove('titleOut');
+                titles[newPageIndex].classList.remove('titleIn');
+
+                titles[previousPageIndex].classList.add('titleOut');
+                titles[newPageIndex].classList.add('titleIn');
+
+                let previousSlide = ArithmaSlideWidget.getAllPages()[previousPageIndex];
+                let newSlide = ArithmaSlideWidget.getAllPages()[newPageIndex];
+
+                for (let i = 0; i<newSlide.children.length; i++){
+                    if (!newSlide.children[i].classList.contains('title')){
+                        let element = newSlide.children[i];
+                        element.classList.remove('restOut');
+                        element.classList.add('restIn');
+                    }
+                }
+
+                for (let i = 0; i<previousSlide.children.length; i++){
+                    if (!previousSlide.children[i].classList.contains('title')){
+                        let element = previousSlide.children[i];
+                        element.classList.remove('restIn');
+                        element.classList.add('restOut');
+                    }
+                }
+
+            }
         }
 
         ArithmaSlideWidget.init();

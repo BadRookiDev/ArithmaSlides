@@ -59,20 +59,59 @@ i{
     margin-right: 10px;
 }
 
-@keyframes TitleIn {
-    0%{
-        height: 0;
+.titleOut{
+    animation: TitleOutAnim 0.3s forwards ease-in-out;
+}
+
+.titleIn{
+    animation: TitleInAnim 0.3s forwards ease-in-out;
+    transform: scale(0);
+    animation-delay: 1s;
+}
+
+.restOut{
+    animation: fadeOutAnim 0.3s forwards ease-in-out;
+    animation-delay: 0.3s;
+}
+
+.restIn{
+    animation: fadeInAnim 0.3s forwards ease-in-out;
+    opacity: 0;
+    animation-delay: 1.3s;
+}
+
+@keyframes fadeInAnim {
+    0% {
+        opacity: 0;
     }
-    100%{
-        height: 100%;
+    100% {
+        opacity: 1;
     }
 }
 
-@keyframes TitleOut {
+@keyframes fadeOutAnim {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes TitleInAnim {
     0%{
-        height: 100%;
+        transform: scale(0);
     }
     100%{
-        height: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes TitleOutAnim {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
     }
 }
