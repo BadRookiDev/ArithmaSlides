@@ -59,25 +59,48 @@ i{
     margin-right: 10px;
 }
 
+#ArithmaPaginationContainer{
+    padding: 20px;
+    right: 20px;
+    top: 50vh;
+    position: fixed;
+    z-index: 999;
+}
+
+#ArithmaPaginationContainer span{
+    display:inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    border: 2px solid whitesmoke;
+    background-color: transparent;
+    transition: background-color 0.5s;
+}
+
+.fillPaginationPoint{
+    background-color: whitesmoke !important;
+    transition: background-color 0.5s;
+}
+
 .titleOut{
-    animation: TitleOutAnim 0.3s forwards ease-in-out;
+    animation: TitleOutAnim 0.5s forwards ease-in-out;
 }
 
 .titleIn{
-    animation: TitleInAnim 0.3s forwards ease-in-out;
+    animation: TitleInAnim 0.5s forwards ease-in-out;
     transform: scale(0);
     animation-delay: 1s;
 }
 
 .restOut{
-    animation: fadeOutAnim 0.3s forwards ease-in-out;
-    animation-delay: 0.3s;
+    animation: fadeOutAnim 0.5s forwards ease-in-out;
+    animation-delay: 0.25s;
 }
 
 .restIn{
-    animation: fadeInAnim 0.3s forwards ease-in-out;
+    animation: fadeInAnim 0.5s forwards ease-in-out;
     opacity: 0;
-    animation-delay: 1.3s;
+    animation-delay: 1.25s;
 }
 
 @keyframes fadeInAnim {

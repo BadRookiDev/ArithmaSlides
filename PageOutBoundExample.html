@@ -38,13 +38,16 @@
 <script src="ArithmaSlide.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        ArithmaSlideWidget.config.noSlideDown = function (){
+        let asw = new ArithmaSlideWidget();
+
+        asw.config.noSlideDown = function (){
             alert("No Slide Down!");
         }
-        ArithmaSlideWidget.config.noSlideUp = function (){
+        asw.config.noSlideUp = function (){
             alert("No Slide Up!");
         }
-        ArithmaSlideWidget.init();
+
+        asw.init();
     });
 </script>
 </body>

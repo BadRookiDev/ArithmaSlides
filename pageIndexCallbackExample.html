@@ -75,7 +75,9 @@
     let arr = ['Home', 'About', 'Contact']
 
     document.addEventListener("DOMContentLoaded", function() {
-        ArithmaSlideWidget.config.pageIndexCallback = function (previousPageIndex, newPageIndex){
+        let asw = new ArithmaSlideWidget();
+
+        asw.config.pageIndexCallback = function (previousPageIndex, newPageIndex){
             let locations = document.getElementById('ArithmaPagination').querySelectorAll('.hollow');
             for (let i = 0; i < locations.length; i++){
                 locations[i].innerHTML = '';
@@ -83,7 +85,7 @@
             locations[newPageIndex].innerHTML = arr[newPageIndex];
         }
 
-        ArithmaSlideWidget.init();
+        asw.init();
     });
 
 </script>

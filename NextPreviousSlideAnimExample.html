@@ -92,13 +92,15 @@
 <script src="ArithmaSlide.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        ArithmaSlideWidget.config.cssAnimationIn = 'slideAboveInWhole';
-        ArithmaSlideWidget.config.cssAnimationOut = 'slideAboveOutWhole';
+        let asw = new ArithmaSlideWidget();
 
-        ArithmaSlideWidget.config.cssAnimationNextIn = 'slideBelowInHalf'
-        ArithmaSlideWidget.config.cssAnimationNextOut = 'slideBelowOutHalf'
+        asw.config.cssAnimationIn = 'slideAboveInWhole';
+        asw.config.cssAnimationOut = 'slideAboveOutWhole';
 
-        ArithmaSlideWidget.init();
+        asw.config.cssAnimationNextIn = 'slideBelowInHalf'
+        asw.config.cssAnimationNextOut = 'slideBelowOutHalf'
+
+        asw.init();
     });
 </script>
 </body>

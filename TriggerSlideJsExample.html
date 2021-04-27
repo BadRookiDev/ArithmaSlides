@@ -38,12 +38,14 @@
 <script src="ArithmaSlide.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        ArithmaSlideWidget.init();
+        let asw = new ArithmaSlideWidget();
+        asw.init();
+
         setTimeout(function (){
-            ArithmaSlideWidget.ScrollHandler.triggerDown();
+            asw.getScrollHandler().triggerDown();
         }, 3000);
         setTimeout(function (){
-            ArithmaSlideWidget.ScrollHandler.triggerUp();
+            asw.getScrollHandler().triggerUp();
         }, 5000);
     });
 </script>

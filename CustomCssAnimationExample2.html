@@ -84,10 +84,12 @@
 <script src="ArithmaSlide.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        ArithmaSlideWidget.config.cssAnimationIn = 'ArithmaCustomInAnim';
-        ArithmaSlideWidget.config.cssAnimationOut = 'ArithmaCustomOutAnim';
+        let asw = new ArithmaSlideWidget();
 
-        ArithmaSlideWidget.init();
+        asw.config.cssAnimationIn = 'ArithmaCustomInAnim';
+        asw.config.cssAnimationOut = 'ArithmaCustomOutAnim';
+
+        asw.init();
     });
 </script>
 </body>
