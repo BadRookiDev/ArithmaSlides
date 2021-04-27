@@ -1,5 +1,6 @@
 const ArithmaSlideWidget = (function () {
     let allPages;
+
     const ConfigMap = {}
 
     const _init = function (element) {
@@ -53,17 +54,9 @@ ArithmaSlideWidget.ScrollHandler = (function () {
     const _init = function (parent) {
         parent.addEventListener("wheel", MouseWheelHandler, {passive: false});
         if (parent !== document.body) {
-            parent.onmouseover = _mouseOverHandler;
-            parent.onmouseout = _mouseOutHandler;
+            parent.onmouseover = ()=> document.body.style.setProperty('overflow','hidden','important');
+            parent.onmouseout = ()=> document.body.style.removeProperty('overflow');
         }
-    }
-
-    const _mouseOverHandler = function (event) {
-        document.body.style.setProperty('overflow','hidden','important');
-    }
-
-    const _mouseOutHandler = function () {
-        document.body.style.removeProperty('overflow');
     }
 
     const MouseWheelHandler = function (event) {
@@ -92,22 +85,28 @@ ArithmaSlideWidget.ScrollHandler = (function () {
             let previousPage = ArithmaSlideWidget.getAllPages()[pageIndex];
             pageIndex++;
 
-            if (previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationOut)
-                && previousPage.classList.contains(ArithmaSlideWidget.config.cssAnimationIn)) {
-                previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
-                previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
-            }
+            //removes if exists
+            previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
+            previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
+            previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextIn);
 
             previousPage.classList.add(ArithmaSlideWidget.config.cssAnimationOut);
 
-            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextIn')) {
+            if(ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextOut')){
+                let nextPage = ArithmaSlideWidget.getAllPages()[pageIndex];
+                nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextOut);
+            }
+
+            if(ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextIn')){
+                previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextIn);
+
                 let nextPage = ArithmaSlideWidget.getAllPages()[pageIndex];
 
-                if (nextPage.classList.contains(ArithmaSlideWidget.config.cssAnimationNextOut)
-                    && nextPage.classList.contains(ArithmaSlideWidget.config.cssAnimationNextIn)) {
-                    nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextIn);
-                    nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextOut);
-                }
+                //removes if exists
+                nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
+                nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
+                nextPage.classList.remove(ArithmaSlideWidget.config.cssAnimationNextIn);
+
 
                 nextPage.classList.add(ArithmaSlideWidget.config.cssAnimationNextIn);
             }
@@ -118,13 +117,21 @@ ArithmaSlideWidget.ScrollHandler = (function () {
 
     const slidePageUp = function () {
         if (pageIndex !== 0) {
-            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextOut')) {
 
+            let previousPage = ArithmaSlideWidget.getAllPages()[pageIndex];
+            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextOut')) {
+                ArithmaSlideWidget.getAllPages()[pageIndex]
+                    .classList.add(ArithmaSlideWidget.config.cssAnimationNextOut);
             }
+            if (ArithmaSlideWidget.config.hasOwnProperty('cssAnimationNextIn')) {
+                ArithmaSlideWidget.getAllPages()[pageIndex]
+                    .classList.add(ArithmaSlideWidget.config.cssAnimationNextIn);
+            }
+            previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationIn);
+            previousPage.classList.remove(ArithmaSlideWidget.config.cssAnimationOut);
 
             pageIndex--;
             let nextPage = ArithmaSlideWidget.getAllPages()[pageIndex];
-
             nextPage.classList.add(ArithmaSlideWidget.config.cssAnimationIn);
         } else if (ArithmaSlideWidget.config.hasOwnProperty('noSlideUp')) {
             ArithmaSlideWidget.config.noSlideUp();
